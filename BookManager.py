@@ -1,3 +1,6 @@
+import logging
+
+
 class BookManager:
     def __init__(self):
         self.books = []
@@ -35,3 +38,40 @@ class BookManager:
 
     def check_any(self, condition):
         return {"any": any(condition(book) for book in self.books)}
+
+
+def logged(exception, mode):
+    logger = logging.getLogger("book_logger")
+    logger.setLevel(logging.DEBUG)
+
+    if mode == "console":
+        handler = logging.StreamHandler()
+    elif mode == "file":
+        handler = logging.FileHandler("book_log.txt")
+    else:
+        raise ValueError("Invalid logging mode!")
+
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except exception as e:
+                logger.exception(e)
+                raise
+
+        return wrapper
+
+    return decorator
+
+class RedundantPagesException(Exception):
+    pass
+
+@logged(RedundantPagesException, 'console')
+def charge_book_pages(book):
+    pages_count = book.get_pages_count()
+    if pages_count > 100:
+        raise RedundantPagesException("Redundant pages in book!")

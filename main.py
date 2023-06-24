@@ -4,10 +4,14 @@ from managers.BookManager import BookManager
 
 if __name__ == '__main__':
     books = [
-        ElectronicBook("The Catcher in the Rye", "J.D. Salinger", "Little, Brown and Company", 1951, "Coming-of-age fiction", "PDF", 1000000),
-        PaperBook("The Great Gatsby", "F. Scott Fitzgerald", "Charles Scribner's Sons", 1925, "Tragedy", 180, 140, 210),
-        ElectronicBook("The Lord of the Rings", "J.R.R. Tolkien", "George Allen & Unwin", 1954, "Fantasy", "EPUB", 2000000),
-        PaperBook("To Kill a Mockingbird", "Harper Lee", "J. B. Lippincott & Co.", 1960, "Southern Gothic", 281, 130, 200)
+        ElectronicBook("The Catcher in the Rye", "J.D. Salinger", "Little, Brown and Company", 1951,
+                       "Coming-of-age fiction", "PDF", 1000000),
+        PaperBook("The Great Gatsby", "F. Scott Fitzgerald", "Charles Scribner's Sons", 1925, "Tragedy", 180, 140,
+                  210),
+        ElectronicBook("The Lord of the Rings", "J.R.R. Tolkien", "George Allen & Unwin", 1954, "Fantasy", "EPUB",
+                       2000000),
+        PaperBook("To Kill a Mockingbird", "Harper Lee", "J. B. Lippincott & Co.", 1960, "Southern Gothic", 281, 130,
+                  200)
     ]
 
     book_manager = BookManager()
@@ -39,3 +43,7 @@ if __name__ == '__main__':
     print("All condition:", book_manager.check_all(lambda book: book.get_pages_count() > 200))
 
     print("Any condition:", book_manager.check_any(lambda book: "The" in book.title))
+
+    # Testing logged decorator
+    book = PaperBook("Example Book", "Example Author", "Example Publisher", 2023, "Example Genre", 150, 100, 150)
+    charge_book_pages(book)
