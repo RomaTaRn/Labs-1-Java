@@ -9,3 +9,6 @@ class PaperBook(Book):
 
     def get_pages_count(self):
         return self.page_count
+
+    def do_something(self):
+        return "PaperBook do_something result"

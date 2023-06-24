@@ -11,3 +11,9 @@ class Book(ABC):
     @abstractmethod
     def get_pages_count(self):
         pass
+
+    def do_something(self):
+        pass
+
+    def __dict_with_type(self, data_type):
+        return {key: value for key, value in self.__dict__.items() if isinstance(value, data_type)}

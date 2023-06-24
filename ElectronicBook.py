@@ -10,3 +10,6 @@ class ElectronicBook(Book):
 
     def get_pages_count(self):
         return self.file_size_in_bytes // self.BYTES_PER_PAGE_COUNT
+
+    def do_something(self):
+        return "ElectronicBook do_something result"
