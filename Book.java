@@ -1,53 +1,34 @@
-package ua.lviv.iot.algo.part1.Book;
+package org.example;
 
 import lombok.*;
 @Getter
 @Setter
 
 @ToString
-public class Book {
+
+public abstract class Book {
     private String title;
     private String author;
     private String publisher;
     private int year;
     private String genre;
-    private int countInWarehouse;
 
-    public Book getBook(int quantity) {
-        int availableBooks = Math.min(quantity, countInWarehouse);
-        countInWarehouse -= availableBooks;
-        return new Book(title, author, publisher, year, genre, availableBooks);
+    public Book() {
+
     }
 
-    public boolean hasMoreBooks() {
-        return countInWarehouse > 0;
-    }
-
-    private static Book instance = new Book();
-
-    public static Book getInstance() {
-        return instance;
-    }
- public  Book(){}
-    public Book(String title, String author, String publisher, int year, String genre, int countInWarehouse) {
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.year = year;
-        this.genre = genre;
-        this.countInWarehouse = countInWarehouse;
-    }
     public static void main(String[] args) {
         Book[] books = {
-                new Book(),
-                new Book("The Catcher in the Rye", "J.D. Salinger", "Little, Brown and Company", 1951, "Coming-of-age fiction", 10),
-                Book.getInstance(),
-                Book.getInstance()
+                new ElectronicBook("The Catcher in the Rye", "J.D. Salinger", "Little, Brown and Company", 1951, "Coming-of-age fiction", "PDF", 1000000),
+                new PaperBook("The Great Gatsby", "F. Scott Fitzgerald", "Charles Scribner's Sons", 1925, "Tragedy", 180, 140, 210),
+                new ElectronicBook("The Lord of the Rings", "J.R.R. Tolkien", "George Allen & Unwin", 1954, "Fantasy", "EPUB", 2000000),
+                new PaperBook("To Kill a Mockingbird", "Harper Lee", "J. B. Lippincott & Co.", 1960, "Southern Gothic", 281, 130, 200)
         };
 
-        for (Book book : books) {
-            System.out.println(System.identityHashCode(book));
+        for (var book : books) {
+            System.out.println(book);
         }
     }
-}
 
+    public abstract int getPagesCount();
+}
