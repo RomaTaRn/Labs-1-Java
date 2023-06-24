@@ -2,7 +2,6 @@ from models.ElectronicBook import ElectronicBook
 from models.PaperBook import PaperBook
 from managers.BookManager import BookManager
 
-
 if __name__ == '__main__':
     books = [
         ElectronicBook("The Catcher in the Rye", "J.D. Salinger", "Little, Brown and Company", 1951, "Coming-of-age fiction", "PDF", 1000000),
